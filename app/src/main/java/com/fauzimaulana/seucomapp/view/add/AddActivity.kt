@@ -22,6 +22,8 @@ class AddActivity : AppCompatActivity() {
         _binding = ActivityAddBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         addViewModel.getLocationType().observe(this) { type ->
             when (type) {
                 is Resource.Loading -> {
@@ -62,6 +64,7 @@ class AddActivity : AppCompatActivity() {
                                     binding.buildingLayout.visibility = View.GONE
                                     binding.floorLayout.visibility = View.GONE
                                     binding.roomLayout.visibility = View.VISIBLE
+                                    createNewRoom()
                                 }
                             }
                         }
@@ -73,6 +76,163 @@ class AddActivity : AppCompatActivity() {
                 }
                 is Resource.Error -> {
                     Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun createNewRoom() {
+        addViewModel.getAllProject().observe(this) { project ->
+            when (project) {
+                is Resource.Loading -> {
+                    //Do nothing
+                }
+                is Resource.Success -> {
+                    val projectName = mutableListOf<String>()
+                    for (i in 0 until project.data!!.size) {
+                        projectName.add(project.data[i].locName)
+                    }
+                    val locationAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, projectName)
+                    binding.spinnerProjectRoom.adapter = locationAdapter
+
+                    binding.spinnerProjectRoom.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                        override fun onItemSelected(
+                            parent: AdapterView<*>?,
+                            view: View?,
+                            position: Int,
+                            id: Long
+                        ) {
+                            getAllBuildingForRoom(project.data[position].locCode, project.data[position].locName)
+                        }
+
+                        override fun onNothingSelected(p0: AdapterView<*>?) {
+                            TODO("Not yet implemented")
+                        }
+
+                    }
+                }
+                is Resource.Error -> {
+                    Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun getAllBuildingForRoom(projectCode: String, projectName: String) {
+        addViewModel.getAllBuildingByProject(projectCode).observe(this) { building ->
+            when (building) {
+                is Resource.Loading -> {
+                    //Do nothing
+                }
+                is Resource.Success -> {
+                    val buildingName = mutableListOf<String>()
+                    for (i in 0 until building.data!!.size) {
+                        buildingName.add(building.data[i].locName)
+                    }
+                    val locationAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, buildingName)
+                    binding.spinnerBuildingRoom.adapter = locationAdapter
+
+                    binding.spinnerBuildingRoom.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                        override fun onItemSelected(
+                            parent: AdapterView<*>?,
+                            view: View?,
+                            position: Int,
+                            id: Long
+                        ) {
+                            getAllFloorForRoom(building.data[position].locCode, building.data[position].locName)
+                        }
+
+                        override fun onNothingSelected(p0: AdapterView<*>?) {
+                            TODO("Not yet implemented")
+                        }
+
+                    }
+                }
+                is Resource.Error -> {
+                    val buildingName = mutableListOf<String>()
+                    val locationAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, buildingName)
+                    binding.spinnerBuilding.adapter = locationAdapter
+                    Toast.makeText(this, "There is no building in $projectName, please create one first", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun getAllFloorForRoom(buildingCode: String, buildingName: String) {
+        addViewModel.getAllFloorByBuilding(buildingCode).observe(this) { floor ->
+            when (floor) {
+                is Resource.Loading -> {
+                    //Do nothing
+                }
+                is Resource.Success -> {
+                    val floorName = mutableListOf<String>()
+                    for (i in 0 until floor.data!!.size) {
+                        floorName.add(floor.data[i].locName)
+                    }
+                    val locationAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, floorName)
+                    binding.spinnerFloor.adapter = locationAdapter
+
+                    binding.spinnerFloor.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                        override fun onItemSelected(
+                            parent: AdapterView<*>?,
+                            view: View?,
+                            position: Int,
+                            id: Long
+                        ) {
+                            createNewRoomToServer(floor.data[position].locCode)
+                        }
+
+                        override fun onNothingSelected(p0: AdapterView<*>?) {
+                            TODO("Not yet implemented")
+                        }
+
+                    }
+                }
+                is Resource.Error -> {
+                    val floorName = mutableListOf<String>()
+                    val locationAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, floorName)
+                    binding.spinnerFloor.adapter = locationAdapter
+                    Toast.makeText(this, "There is no floor in $buildingName, please create one first", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun createNewRoomToServer(floorCode: String) {
+        binding.buttonSaveRoom.setOnClickListener {
+            val name = binding.roomNameEditText.text.toString()
+            val lat = binding.roomLatEditText.text.toString()
+            val lon = binding.roomLonEditText.text.toString()
+            val dis = binding.roomDisEditText.text.toString()
+
+            when {
+                name.isEmpty() -> {
+                    binding.roomNameEditText.error = "Name cannot be empty"
+                }
+                lat.isEmpty() -> {
+                    binding.roomLatEditText.error = "Latitude cannot be empty"
+                }
+                lon.isEmpty() -> {
+                    binding.roomLonEditText.error = "Longitude cannot be empty"
+                }
+                dis.isEmpty() -> {
+                    binding.roomDisEditText.error = "Dispensation cannot be empty"
+                }
+                else -> {
+                    addViewModel.createRoom(name, "RO", lat.toDouble(), lon.toDouble(), dis.toDouble(), floorCode).observe(this@AddActivity) { result ->
+                        when(result) {
+                            is Resource.Loading -> {
+                                //DO nothing
+                            }
+                            is Resource.Success -> {
+                                Toast.makeText(this@AddActivity, "Floor Created", Toast.LENGTH_SHORT).show()
+                                finish()
+                            }
+                            is Resource.Error -> {
+                                Toast.makeText(this@AddActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -310,5 +470,15 @@ class AddActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
+    }
+
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
     }
 }
