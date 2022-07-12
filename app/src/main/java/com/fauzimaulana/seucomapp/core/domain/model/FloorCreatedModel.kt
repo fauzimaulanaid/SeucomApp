@@ -1,6 +1,6 @@
 package com.fauzimaulana.seucomapp.core.domain.model
 
-data class ProjectModel(
+data class FloorCreatedModel(
     val locCreatedAt: String,
     val locName: String,
     val locUpdatedUsr: String,

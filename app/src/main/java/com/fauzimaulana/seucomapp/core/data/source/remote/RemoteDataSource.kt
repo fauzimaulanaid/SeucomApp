@@ -43,6 +43,40 @@ class RemoteDataSource(private val apiService: ApiService) {
         }.flowOn(Dispatchers.IO)
     }
 
+    fun getAllBuildingByProject(projectCode: String): Flow<ApiResponse<List<BuildingItem>>> {
+        return flow {
+            try {
+                val response = apiService.getBuildingByProject(projectCode)
+                val dataArray = response.data
+                if (dataArray.isNotEmpty()) {
+                    emit(ApiResponse.Success(response.data))
+                } else {
+                    emit(ApiResponse.Empty)
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.toString()))
+                Log.e("RemoteDataSource: ", e.toString())
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    fun getAllFloorByBuilding(buildingCode: String): Flow<ApiResponse<List<FloorItem>>> {
+        return flow {
+            try {
+                val response = apiService.getFloorByBuilding(buildingCode)
+                val dataArray = response.data
+                if (dataArray.isNotEmpty()) {
+                    emit(ApiResponse.Success(response.data))
+                } else {
+                    emit(ApiResponse.Empty)
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.toString()))
+                Log.e("RemoteDataSource: ", e.toString())
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
     fun createProject(locName: String, locType: String, locLat: Double, locLon: Double, locDis: Double): Flow<ApiResponse<ProjectCreatedItemResponse>> {
         return flow {
             try {
@@ -64,6 +98,40 @@ class RemoteDataSource(private val apiService: ApiService) {
         return flow {
             try {
                 val response = apiService.createBuilding(locName, locType, locLat, locLon, locDis, projectCode)
+                if (response.status == "error") {
+                    emit(ApiResponse.Error(response.message))
+                    Log.e("RemoteDataSource: ", response.message)
+                } else {
+                    emit(ApiResponse.Success(response.data))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.toString()))
+                Log.e("RemoteDataSource: ", e.toString())
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    fun createFloor(locName: String, locType: String, locLat: Double, locLon: Double, locDis: Double, buildingCode: String): Flow<ApiResponse<FloorCreatedItemResponse>> {
+        return flow {
+            try {
+                val response = apiService.createFloor(locName, locType, locLat, locLon, locDis, buildingCode)
+                if (response.status == "error") {
+                    emit(ApiResponse.Error(response.message))
+                    Log.e("RemoteDataSource: ", response.message)
+                } else {
+                    emit(ApiResponse.Success(response.data))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.toString()))
+                Log.e("RemoteDataSource: ", e.toString())
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    fun createRoom(locName: String, locType: String, locLat: Double, locLon: Double, locDis: Double, floorCode: String): Flow<ApiResponse<RoomCreatedItemResponse>> {
+        return flow {
+            try {
+                val response = apiService.createRoom(locName, locType, locLat, locLon, locDis, floorCode)
                 if (response.status == "error") {
                     emit(ApiResponse.Error(response.message))
                     Log.e("RemoteDataSource: ", response.message)

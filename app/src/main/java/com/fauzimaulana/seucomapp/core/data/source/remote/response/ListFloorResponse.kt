@@ -2,12 +2,13 @@ package com.fauzimaulana.seucomapp.core.data.source.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class ListProjectResponse(
+data class ListFloorResponse(
+
 	@field:SerializedName("code")
 	val code: Int,
 
 	@field:SerializedName("data")
-	val data: List<ProjectItem>,
+	val data: List<FloorItem>,
 
 	@field:SerializedName("message")
 	val message: String,
@@ -16,7 +17,7 @@ data class ListProjectResponse(
 	val status: String
 )
 
-data class ProjectItem(
+data class FloorItem(
 
 	@field:SerializedName("locCreatedAt")
 	val locCreatedAt: String,
