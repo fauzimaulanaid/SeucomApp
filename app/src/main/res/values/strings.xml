@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">SeucomApp</string>
+    <string name="project_name">Project Name</string>
+    <string name="type">Type</string>
+    <string name="code">Code</string>
+    <string name="add">Add</string>
+    <string name="location_type">Location Type</string>
+    <string name="latitude">Latitude</string>
+    <string name="location_name">Location Name</string>
+    <string name="hint_name">Please input the name</string>
+    <string name="hint_longitude">Please input the Longitude</string>
+    <string name="hint_latitude">Please input the Latitude</string>
+    <string name="save">Save</string>
+    <string name="longitude">Longitude</string>
+    <string name="dispensation">Dispensation (in meter)</string>
+    <string name="hint_dispensation">Please input the Dispensation</string>
+    <string name="project">Project</string>
+    <string name="building">Building</string>
+    <string name="floor">Floor</string>
+</resources>
