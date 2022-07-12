@@ -225,7 +225,7 @@ class AddActivity : AppCompatActivity() {
                                 //DO nothing
                             }
                             is Resource.Success -> {
-                                Toast.makeText(this@AddActivity, "Floor Created", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@AddActivity, "Room Created", Toast.LENGTH_SHORT).show()
                                 finish()
                             }
                             is Resource.Error -> {

@@ -1,8 +1,5 @@
 package com.fauzimaulana.seucomapp.core.domain.reposirtory
 
-import com.fauzimaulana.seucomapp.core.data.source.remote.ApiResponse
-import com.fauzimaulana.seucomapp.core.data.source.remote.response.FloorItem
-import com.fauzimaulana.seucomapp.core.data.source.remote.response.ProjectCreatedItemResponse
 import com.fauzimaulana.seucomapp.core.domain.model.*
 import com.fauzimaulana.seucomapp.core.vo.Resource
 import kotlinx.coroutines.flow.Flow

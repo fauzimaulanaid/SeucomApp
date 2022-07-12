@@ -25,9 +25,6 @@ data class BuildingCreatedItemResponse(
 	@field:SerializedName("locName")
 	val locName: String,
 
-//	@field:SerializedName("project")
-//	val project: AtProject,
-
 	@field:SerializedName("locUpdatedUsr")
 	val locUpdatedUsr: String,
 
@@ -61,39 +58,3 @@ data class BuildingCreatedItemResponse(
 	@field:SerializedName("locID")
 	val locID: String
 )
-
-//data class AtProject(
-//
-//	@field:SerializedName("locCode")
-//	val locCode: String,
-//
-//	@field:SerializedName("locCreatedAt")
-//	val locCreatedAt: String,
-//
-//	@field:SerializedName("locActive")
-//	val locActive: Boolean,
-//
-//	@field:SerializedName("locName")
-//	val locName: String,
-//
-//	@field:SerializedName("locUpdatedUsr")
-//	val locUpdatedUsr: String,
-//
-//	@field:SerializedName("locLongitude")
-//	val locLongitude: Int,
-//
-//	@field:SerializedName("locUpdatedAt")
-//	val locUpdatedAt: String,
-//
-//	@field:SerializedName("locType")
-//	val locType: String,
-//
-//	@field:SerializedName("locLatitude")
-//	val locLatitude: Int,
-//
-//	@field:SerializedName("locDispensation")
-//	val locDispensation: Int,
-//
-//	@field:SerializedName("locID")
-//	val locID: String
-//)

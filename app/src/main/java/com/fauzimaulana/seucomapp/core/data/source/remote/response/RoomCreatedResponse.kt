@@ -25,9 +25,6 @@ data class RoomCreatedItemResponse(
 	@field:SerializedName("locName")
 	val locName: String,
 
-//	@field:SerializedName("project")
-//	val project: Project,
-
 	@field:SerializedName("locUpdatedUsr")
 	val locUpdatedUsr: String,
 
@@ -42,9 +39,6 @@ data class RoomCreatedItemResponse(
 
 	@field:SerializedName("locTypeLabel")
 	val locTypeLabel: String,
-
-//	@field:SerializedName("building")
-//	val building: Building,
 
 	@field:SerializedName("locActiveLabel")
 	val locActiveLabel: String,
@@ -61,117 +55,6 @@ data class RoomCreatedItemResponse(
 	@field:SerializedName("locLatitude")
 	val locLatitude: Double,
 
-//	@field:SerializedName("floor")
-//	val floor: Floor,
-
 	@field:SerializedName("locID")
 	val locID: String
 )
-
-//data class Project(
-//
-//	@field:SerializedName("locCode")
-//	val locCode: String,
-//
-//	@field:SerializedName("locCreatedAt")
-//	val locCreatedAt: String,
-//
-//	@field:SerializedName("locActive")
-//	val locActive: Boolean,
-//
-//	@field:SerializedName("locName")
-//	val locName: String,
-//
-//	@field:SerializedName("locUpdatedUsr")
-//	val locUpdatedUsr: String,
-//
-//	@field:SerializedName("locLongitude")
-//	val locLongitude: Int,
-//
-//	@field:SerializedName("locUpdatedAt")
-//	val locUpdatedAt: String,
-//
-//	@field:SerializedName("locType")
-//	val locType: String,
-//
-//	@field:SerializedName("locLatitude")
-//	val locLatitude: Int,
-//
-//	@field:SerializedName("locDispensation")
-//	val locDispensation: Int,
-//
-//	@field:SerializedName("locID")
-//	val locID: String
-//)
-//
-//data class Building(
-//
-//	@field:SerializedName("locCode")
-//	val locCode: String,
-//
-//	@field:SerializedName("locCreatedAt")
-//	val locCreatedAt: String,
-//
-//	@field:SerializedName("locActive")
-//	val locActive: Boolean,
-//
-//	@field:SerializedName("locName")
-//	val locName: String,
-//
-//	@field:SerializedName("locUpdatedUsr")
-//	val locUpdatedUsr: String,
-//
-//	@field:SerializedName("locLongitude")
-//	val locLongitude: Int,
-//
-//	@field:SerializedName("locUpdatedAt")
-//	val locUpdatedAt: String,
-//
-//	@field:SerializedName("locType")
-//	val locType: String,
-//
-//	@field:SerializedName("locLatitude")
-//	val locLatitude: Int,
-//
-//	@field:SerializedName("locDispensation")
-//	val locDispensation: Int,
-//
-//	@field:SerializedName("locID")
-//	val locID: String
-//)
-//
-//data class Floor(
-//
-//	@field:SerializedName("locCode")
-//	val locCode: String,
-//
-//	@field:SerializedName("locCreatedAt")
-//	val locCreatedAt: String,
-//
-//	@field:SerializedName("locActive")
-//	val locActive: Boolean,
-//
-//	@field:SerializedName("locName")
-//	val locName: String,
-//
-//	@field:SerializedName("locUpdatedUsr")
-//	val locUpdatedUsr: String,
-//
-//	@field:SerializedName("locLongitude")
-//	val locLongitude: Int,
-//
-//	@field:SerializedName("locUpdatedAt")
-//	val locUpdatedAt: String,
-//
-//	@field:SerializedName("locType")
-//	val locType: String,
-//
-//	@field:SerializedName("locLatitude")
-//	val locLatitude: Int,
-//
-//	@field:SerializedName("locDispensation")
-//	val locDispensation: Int,
-//
-//	@field:SerializedName("locID")
-//	val locID: String
-//)
