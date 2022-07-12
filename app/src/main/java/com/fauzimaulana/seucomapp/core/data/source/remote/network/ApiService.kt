@@ -17,6 +17,17 @@ interface ApiService {
     suspend fun getFloorByBuilding(@Path("buildingCode") buildingCode: String): ListFloorResponse
 
     @FormUrlEncoded
+    @PUT("locations/{dataID}")
+    suspend fun updateData(
+        @Path("dataID") dataID: String,
+        @Field("locName") name: String,
+        @Field("locType") type: String,
+        @Field("locLatitude") lat: Double,
+        @Field("locLongitude") lon: Double,
+        @Field("locDispensation") dispensation: Double
+    ): ProjectCreatedResponse
+
+    @FormUrlEncoded
     @POST("locations")
     suspend fun createProject(
         @Field("locName") name: String,

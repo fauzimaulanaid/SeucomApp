@@ -17,9 +17,15 @@
         android:theme="@style/Theme.SeucomApp"
         tools:targetApi="31">
         <activity
-            android:name=".view.add.AddActivity"
-            android:label="@string/add"
+            android:name=".view.edit.EditActivity"
             android:exported="false" />
+        <activity
+            android:name=".view.detail.DetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.add.AddActivity"
+            android:exported="false"
+            android:label="@string/add" />
         <activity
             android:name=".view.home.MainActivity"
             android:exported="true">

@@ -1,5 +1,6 @@
 package com.fauzimaulana.seucomapp.view.add
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -8,6 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.fauzimaulana.seucomapp.core.vo.Resource
 import com.fauzimaulana.seucomapp.databinding.ActivityAddBinding
+import com.fauzimaulana.seucomapp.view.home.MainActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class AddActivity : AppCompatActivity() {
@@ -226,7 +228,9 @@ class AddActivity : AppCompatActivity() {
                             }
                             is Resource.Success -> {
                                 Toast.makeText(this@AddActivity, "Room Created", Toast.LENGTH_SHORT).show()
-                                finish()
+                                val intent = Intent(this@AddActivity, MainActivity::class.java)
+                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                startActivity(intent)
                             }
                             is Resource.Error -> {
                                 Toast.makeText(this@AddActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
@@ -343,7 +347,9 @@ class AddActivity : AppCompatActivity() {
                             }
                             is Resource.Success -> {
                                 Toast.makeText(this@AddActivity, "Floor Created", Toast.LENGTH_SHORT).show()
-                                finish()
+                                val intent = Intent(this@AddActivity, MainActivity::class.java)
+                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                startActivity(intent)
                             }
                             is Resource.Error -> {
                                 Toast.makeText(this@AddActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
@@ -420,7 +426,9 @@ class AddActivity : AppCompatActivity() {
                             }
                             is Resource.Success -> {
                                 Toast.makeText(this@AddActivity, "Building Created", Toast.LENGTH_SHORT).show()
-                                finish()
+                                val intent = Intent(this@AddActivity, MainActivity::class.java)
+                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                startActivity(intent)
                             }
                             is Resource.Error -> {
                                 Toast.makeText(this@AddActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
@@ -460,7 +468,9 @@ class AddActivity : AppCompatActivity() {
                             }
                             is Resource.Success -> {
                                 Toast.makeText(this@AddActivity, "Project Created", Toast.LENGTH_SHORT).show()
-                                finish()
+                                val intent = Intent(this@AddActivity, MainActivity::class.java)
+                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                startActivity(intent)
                             }
                             is Resource.Error -> {
                                 Toast.makeText(this@AddActivity, "Something went wrong", Toast.LENGTH_SHORT).show()

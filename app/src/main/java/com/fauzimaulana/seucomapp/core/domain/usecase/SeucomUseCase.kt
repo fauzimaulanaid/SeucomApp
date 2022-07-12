@@ -15,6 +15,8 @@ interface SeucomUseCase {
 
     fun createProject(locName: String, locType: String, locLat: Double, locLon: Double, locDis: Double): Flow<Resource<ProjectCreatedModel>>
 
+    fun updateData(dataID: String, locName: String, locType: String, locLat: Double, locLon: Double, locDis: Double): Flow<Resource<ProjectCreatedModel>>
+
     fun createBuilding(locName: String, locType: String, locLat: Double, locLon: Double, locDis: Double, projectCode: String): Flow<Resource<BuildingCreatedModel>>
 
     fun createFloor(locName: String, locType: String, locLat: Double, locLon: Double, locDis: Double, buildingCode: String): Flow<Resource<FloorCreatedModel>>

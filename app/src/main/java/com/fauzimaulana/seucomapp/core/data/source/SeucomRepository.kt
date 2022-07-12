@@ -70,6 +70,24 @@ class SeucomRepository(private val remoteDataSource: RemoteDataSource): ISeucomR
         }.asFlow()
     }
 
+    override fun updateData(
+        dataID: String,
+        locName: String,
+        locType: String,
+        locLat: Double,
+        locLon: Double,
+        locDis: Double
+    ): Flow<Resource<ProjectCreatedModel>> {
+        return object : NetworkBoundResource<ProjectCreatedModel, ProjectCreatedItemResponse>() {
+            override fun createCall(): Flow<ApiResponse<ProjectCreatedItemResponse>> =
+                remoteDataSource.updateData(dataID, locName, locType, locLat, locLon, locDis)
+
+            override fun loadData(data: ProjectCreatedItemResponse): ProjectCreatedModel =
+                DataMapper.mapProjectCreatedResponseToDomain(data)
+
+        }.asFlow()
+    }
+
     override fun createBuilding(
         locName: String,
         locType: String,

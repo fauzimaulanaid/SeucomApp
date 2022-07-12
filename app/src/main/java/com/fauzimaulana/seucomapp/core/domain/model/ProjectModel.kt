@@ -1,5 +1,9 @@
 package com.fauzimaulana.seucomapp.core.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class ProjectModel(
     val locCreatedAt: String,
     val locName: String,
@@ -14,4 +18,4 @@ data class ProjectModel(
     val locType: String,
     val locLatitude: Double,
     val locID: String
-)
+): Parcelable

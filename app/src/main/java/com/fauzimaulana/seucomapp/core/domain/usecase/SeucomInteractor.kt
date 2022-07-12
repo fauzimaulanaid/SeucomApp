@@ -27,6 +27,16 @@ class SeucomInteractor(private val seucomRepository: ISeucomRepository): SeucomU
     ): Flow<Resource<ProjectCreatedModel>> =
         seucomRepository.createProject(locName, locType, locLat, locLon, locDis)
 
+    override fun updateData(
+        dataID: String,
+        locName: String,
+        locType: String,
+        locLat: Double,
+        locLon: Double,
+        locDis: Double
+    ): Flow<Resource<ProjectCreatedModel>> =
+        seucomRepository.updateData(dataID, locName, locType, locLat, locLon, locDis)
+
     override fun createBuilding(
         locName: String,
         locType: String,

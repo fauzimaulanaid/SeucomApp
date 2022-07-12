@@ -94,6 +94,23 @@ class RemoteDataSource(private val apiService: ApiService) {
         }.flowOn(Dispatchers.IO)
     }
 
+    fun updateData(dataID: String, locName: String, locType: String, locLat: Double, locLon: Double, locDis: Double): Flow<ApiResponse<ProjectCreatedItemResponse>> {
+        return flow {
+            try {
+                val response = apiService.updateData(dataID, locName, locType, locLat, locLon, locDis)
+                if (response.status == "error") {
+                    emit(ApiResponse.Error(response.message))
+                    Log.e("RemoteDataSource: ", response.message)
+                } else {
+                    emit(ApiResponse.Success(response.data))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.toString()))
+                Log.e("RemoteDataSource: ", e.toString())
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
     fun createBuilding(locName: String, locType: String, locLat: Double, locLon: Double, locDis: Double, projectCode: String): Flow<ApiResponse<BuildingCreatedItemResponse>> {
         return flow {
             try {

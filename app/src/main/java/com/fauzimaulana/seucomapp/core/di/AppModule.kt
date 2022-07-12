@@ -7,6 +7,8 @@ import com.fauzimaulana.seucomapp.core.domain.reposirtory.ISeucomRepository
 import com.fauzimaulana.seucomapp.core.domain.usecase.SeucomInteractor
 import com.fauzimaulana.seucomapp.core.domain.usecase.SeucomUseCase
 import com.fauzimaulana.seucomapp.view.add.AddViewModel
+import com.fauzimaulana.seucomapp.view.detail.DetailViewModel
+import com.fauzimaulana.seucomapp.view.edit.EditViewModel
 import com.fauzimaulana.seucomapp.view.home.MainViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -46,4 +48,6 @@ val useCaseModule = module {
 val viewModelModule = module {
     viewModel { MainViewModel(get()) }
     viewModel { AddViewModel(get()) }
+    viewModel { EditViewModel(get()) }
+    viewModel { DetailViewModel(get()) }
 }
